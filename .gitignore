@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.env.*
+*.sqlite*
+*.db
+*.zip
+*.pdf
+*.xlsx
+*.png
+*.jpg
+*.jpeg
+data/
+media/
+exports/
+work/

@@ -1,0 +1,121 @@
+{
+  "version": "1.8.1-rc.1",
+  "status": "release_candidate",
+  "schema_version": 4,
+  "tested_workbench_version": "0.9",
+  "fingerprint_algorithm": "SHA256(sorted(relative_posix_path UTF8 + NUL + raw_file_bytes + NUL)); .md/.py/.yaml; excludes __pycache__",
+  "skill_fingerprints": {
+    "study-question-ingest": "e8d111dc59446425ec4977b9e796228a935ac445eb176803dac35fe77eafe5ac",
+    "study-question-review": "1bd38d599c18e29c421fb5af28bc603c7e3b83083df7b71e15e0c0143ca33d1a"
+  },
+  "files": [
+    {
+      "path": "skills/study-question-ingest/SKILL.md",
+      "sha256": "d1bb149b2ba315bcc210670316c70b31ead7f4fdf4fba16012a4a55f646eb96e"
+    },
+    {
+      "path": "skills/study-question-ingest/agents/openai.yaml",
+      "sha256": "6890a4b52dcba6deb43261294d6f5c35f79c845465dc7fd2fe97207a80d44e5f"
+    },
+    {
+      "path": "skills/study-question-ingest/references/compatibility.md",
+      "sha256": "26b922bd05e5f0030918c6fbbd72c35d47fef5293ddee24ef7031d0c2688ee8c"
+    },
+    {
+      "path": "skills/study-question-ingest/references/confirmed-rules.md",
+      "sha256": "6032f14f087a142fca9fde4cc435280f885d0a4ff928d8f876a083899a9e1305"
+    },
+    {
+      "path": "skills/study-question-ingest/references/handoff.md",
+      "sha256": "3b1207557cc79bcc2d82ee5de1067e413a5a49d1736b14e87ac6bbe6d536b45f"
+    },
+    {
+      "path": "skills/study-question-ingest/references/operations.md",
+      "sha256": "5262ee5aae5ffec12f2ca839d158e649f8682d32746ea1d8fc18b3b139fceecd"
+    },
+    {
+      "path": "skills/study-question-ingest/references/parent-review.md",
+      "sha256": "ab940dd5518ac9728f16746006801559591f082a580bf2e0fbf5edf578dc9d33"
+    },
+    {
+      "path": "skills/study-question-ingest/references/protocol.md",
+      "sha256": "062307e63e436399180354a4396a2b9c61631458e0a9c262a4e7510c9d519e76"
+    },
+    {
+      "path": "skills/study-question-ingest/references/question-content.md",
+      "sha256": "3173e49e6a2d5c08b14c6389cbdd0952c551853296f6eb7e7f151146a19ccac7"
+    },
+    {
+      "path": "skills/study-question-ingest/references/reading-analysis.md",
+      "sha256": "30324d9d930e738befe0f0b6045a126b27a8eb1dc3b938861035fc9c3a53fb68"
+    },
+    {
+      "path": "skills/study-question-ingest/references/strengthening.md",
+      "sha256": "d78bb492c907a10c1bc0f93d72c7e79484d6d22bf2c74513f5f781375e111204"
+    },
+    {
+      "path": "skills/study-question-ingest/references/student-hints.md",
+      "sha256": "949eba1eb1cfa15409eb6a67c185e4d2412ba40ba7c4bee33eea1727cd7c253d"
+    },
+    {
+      "path": "skills/study-question-ingest/scripts/handoff.py",
+      "sha256": "fb058087a5d3807987e60b68cf54ec35750606fba6e6c8916a93de6a5999f4c3"
+    },
+    {
+      "path": "skills/study-question-ingest/scripts/ingest.py",
+      "sha256": "b1e622a439106c326646b7ae87ab4e2d3ae30de46bf6adf0dd04a1cf285b084d"
+    },
+    {
+      "path": "skills/study-question-review/SKILL.md",
+      "sha256": "1c04a6e631531b3a14bf3b12a7e59e929f151c21d2829184b7e1c76a1ce6704f"
+    },
+    {
+      "path": "skills/study-question-review/agents/openai.yaml",
+      "sha256": "c17aa9d605b45091cfa28a563b2bcfb331957404a4186248915916a32b6354e5"
+    },
+    {
+      "path": "skills/study-question-review/references/compatibility.md",
+      "sha256": "26b922bd05e5f0030918c6fbbd72c35d47fef5293ddee24ef7031d0c2688ee8c"
+    },
+    {
+      "path": "skills/study-question-review/references/confirmed-rules.md",
+      "sha256": "6032f14f087a142fca9fde4cc435280f885d0a4ff928d8f876a083899a9e1305"
+    },
+    {
+      "path": "skills/study-question-review/references/operations.md",
+      "sha256": "cd1b85f05466c0e0483a29fa06e7bb8b4f92ef877a5ece9efa9fb6bdd3d156ef"
+    },
+    {
+      "path": "skills/study-question-review/references/parent-review.md",
+      "sha256": "ab940dd5518ac9728f16746006801559591f082a580bf2e0fbf5edf578dc9d33"
+    },
+    {
+      "path": "skills/study-question-review/references/reading-analysis.md",
+      "sha256": "30324d9d930e738befe0f0b6045a126b27a8eb1dc3b938861035fc9c3a53fb68"
+    },
+    {
+      "path": "skills/study-question-review/references/reconciliation.md",
+      "sha256": "87d2c9a3e44607d10845a45f51a63e0ee6216993092c64f97be68f77db3613e3"
+    },
+    {
+      "path": "skills/study-question-review/references/strengthening.md",
+      "sha256": "ade9cce1ca9468c545d8972c37b1c447c5abb6f61b1927ccfe762df666b55ac7"
+    },
+    {
+      "path": "skills/study-question-review/references/student-hints.md",
+      "sha256": "f789a563a343e552460189bdbe51644746c1039315cc9db31cc5f9bc5b301720"
+    },
+    {
+      "path": "skills/study-question-review/scripts/reading.py",
+      "sha256": "916be6998c6759e1c4d9376749c7e0ffa300375e073b446014150da053a6ff2e"
+    },
+    {
+      "path": "skills/study-question-review/scripts/reconcile.py",
+      "sha256": "52e82676f7a725317af93aa9fa7c5adc9da0b3b952d0d58e783f0aa7f42f1a1a"
+    },
+    {
+      "path": "skills/study-question-review/scripts/review.py",
+      "sha256": "6cec671360e687bf9da11925c429cfc1ae198024828f31324bb5df2b66dd826f"
+    }
+  ]
+}
