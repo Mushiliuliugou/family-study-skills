@@ -1,4 +1,4 @@
 interface:
-  display_name: "错题按期重温"
-  short_description: "读取统一题库，核对到期与暂停清单，按家长确认题量安排重温并追踪反馈"
-  default_prompt: "使用 $study-question-review 检查今天各科到期错题，先给出可审核的重温预览。"
+  display_name: "反馈与一周备题"
+  short_description: "结合学生作答与家长批改反馈准备一周候选题，家长逐日确认分配"
+  default_prompt: "使用 $study-question-review 读取学生与家长反馈，先给出一周可调整的候选备题方案。"

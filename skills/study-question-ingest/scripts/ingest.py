@@ -91,6 +91,14 @@ def bundle(path):
                 require(isinstance(codes,list) and all(isinstance(c,str) and c in REASONS for c in codes) and len(codes)==len(set(codes)) and text(r.get('reason_note'),120),'学生自述字段不正确')
                 intakes[r['id']]=r;touched.add(r['question_id'])
             require(touched==local_q,'存在没有收题来源的题目')
+        if 'standard-template.json' in names:
+            template=read_json('standard-template.json')
+            require(isinstance(template,dict) and template.get('format')=='family-study-standard' and template.get('version')==1 and template.get('data_epoch')==m.get('data_epoch') and isinstance(template.get('questions'),list),'标准模板身份或格式不正确')
+            template_rows=template['questions']
+            require(len(template_rows)==len(questions) and all(isinstance(r,dict) and isinstance(r.get('question_id'),str) for r in template_rows),'标准模板题目数量不正确')
+            require({r['question_id'] for r in template_rows}==set(questions),'标准模板题号与原料不符')
+            require(all(r.get('subject_id')==questions[r['question_id']]['subject_id'] and r.get('expected_updated_at')==questions[r['question_id']]['updated_at'] for r in template_rows),'标准模板科目或来源版本不符')
+            expected.add('standard-template.json')
         require(set(names)==expected,'ZIP包含未登记文件或缺少交接说明')
         require(m.get('question_count')==len(questions) and m.get('intake_count')==len(intakes) and len(intakes)<=500,'总数量不符或超过500次收题')
     return {'sha256':sha_file(path),'manifest':m,'questions':questions,'intakes':intakes,'media':media}
@@ -106,6 +114,7 @@ def inspect(path,out):
     write_json(out/'source-index.json',{'handoff_sha256':b['sha256'],'subjects':b['manifest']['subjects'],'questions':list(b['questions'].values()),'student_self_reports':[r for r in b['intakes'].values() if r.get('origin','student')=='student'],'intake_records':list(b['intakes'].values())})
     # Only validated image members are extracted, so the agent can actually inspect them.
     with zipfile.ZipFile(path) as z:
+        if 'standard-template.json' in z.namelist():write_json(out/'standard-template.json',json.loads(z.read('standard-template.json')))
         for a in b['media'].values():
             dest=out/a['file'];dest.parent.mkdir(exist_ok=True)
             with dest.open('xb') as f:f.write(z.read(a['file']))

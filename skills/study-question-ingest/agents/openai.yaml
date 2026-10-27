@@ -1,4 +1,4 @@
 interface:
   display_name: "错题入库整理"
-  short_description: "将家庭错题交接包按学科整理入统一题库，保留学生自述、来源与独立核实记录"
-  default_prompt: "使用 $study-question-ingest 整理这份错题交接包，先生成可审核的分科入库预览。"
+  short_description: "从粗加工照片恢复无答案题面，补齐参考资料，交家长审核后标准入库"
+  default_prompt: "使用 $study-question-ingest 整理这份错题交接包，先生成标准入库包与待补清单。"

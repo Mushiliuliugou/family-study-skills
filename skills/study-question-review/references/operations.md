@@ -38,7 +38,7 @@ CLI不会启动、替换或停止工作台服务。需要服务时使用原工�
 
 ## 结果与日期
 
-家长纸质批改后在原任务“批量反馈”保存。真实反馈遵循当前系统规则：独立通过进入真题库退出错题队列，提示后通过递进3/7/14/30天，失败默认次日且保留提示进度，待核对暂离普通到期队列；具体天数读取规则快照，不在本脚本硬编码新P阈值。
+家长纸质批改后在原任务“批量反馈”保存。真实反馈遵循当前系统规则：独立通过进入已掌握题库退出错题队列，提示后通过递进3/7/14/30天，失败默认次日且保留提示进度，待核对暂离普通到期队列；具体天数读取规则快照，不在本脚本硬编码新P阈值。
 
 学生跳过或未提交不是错题判定；同题不同日期再次重做保留为新尝试，不新增重复题。旧题面快照与当前题面版本分开，避免后来修改导致反馈错位。
 
@@ -61,3 +61,16 @@ CLI不会启动、替换或停止工作台服务。需要服务时使用原工�
 ## 阅读理解专用摘要
 
 阅读类使用scripts/reading.py输出JSON/Markdown，仅分析与分类，不输入原题。详见[阅读读取协议](reading-analysis.md)。正常任务发布改用/api/review-context精简上下文，不通过完整bootstrap取题面；过旧服务需先重启新版。
+
+
+## 一周备题 v2工作流程
+
+1.9版重点为“读取反馈→备好候选→家长逐日选择”。已有单日plan/publish继续可用。
+
+工作台POST /api/weekly-prepare（只读）参数：start_date（YYYY-MM-DD，需家长明确或采用当前日期并说明）、days（1—14，默认7）、subject_ids（已开设科目）、limit（期间最多0—30题，默认10）、minutes_per_question（0.5—20，默认5）、daily_minutes（0—20，默认15，含当天已有任务）。这些是可调规划值，不是学生每日作业要求。
+
+返回family-study-weekly v1 JSON：data_epoch、generated_at、days、selected_count、unselected。days中每天含task_date、subjects、allocated_minutes、new_minutes；每科含question_ids、versions（题面版本）、review_versions（复习反馈版本）、count、estimated_minutes、questions（选择原因、P、到期日、最近批改结果、跳过记录数）。跳过仅作提示，不当作未通过。
+
+只选择普通可练习错题，不提前派未到期题，不复制主库。同题在本候选周期只选一次；后续新反馈后可重新备题。家长目标0或题量0可休息。界面可保存/重新打开JSON，勾选每天所需题后调用task-preview预览，再经明确确认调用task-publish。每科传question_ids/versions/review_versions/count/estimated_minutes；任一反馈、版本、占用或时间预算变化需重新预览。按天发布，不一键下达整周。
+
+脚本：python3 scripts/review.py week --base-url http://127.0.0.1:8765 --start-date YYYY-MM-DD --days 7 --limit 10 --daily-minutes 15 --minutes-per-question 5 --subjects math english --out <新输出目录>。只读接口，不需要--allow-formal写入开关；对正式库仍只读取，不发布任务。无本机运行能力的智能体交付分析和所需摘要清单，不伪造实时结果。

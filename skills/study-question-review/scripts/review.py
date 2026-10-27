@@ -186,7 +186,7 @@ def publish(plan_path,base,allow_formal=False):
         'data_epoch':p['data_epoch'],'task_date':p['task_date'],'task_ids':result['task_ids'],'reused':result['reused'],'time_budget':p['time_budget'],'review_policy_version':p.get('review_policy_version','legacy'),'learning_result_recorded':False}
 
 def write_report(out,result):
-    out=Path(out);out.mkdir(parents=True,exist_ok=True);name=('plan' if result['format']=='study-question-review-plan' else 'publish')+'-'+uuid4().hex[:8]+'.json';path=out/name
+    out=Path(out);out.mkdir(parents=True,exist_ok=True);name=('week' if result['format']=='family-study-weekly' else 'plan' if result['format']=='study-question-review-plan' else 'publish')+'-'+uuid4().hex[:8]+'.json';path=out/name
     with path.open('x') as f:json.dump(result,f,ensure_ascii=False,indent=2)
     if result['format']=='study-question-review-plan':
         lines=['# 错题重温预览','',f'日期：{result["task_date"]}；本文件不改变复习日期或记录学习结果。','',f'全库{result["inventory_total"]}题，分类合计{sum(result["counts"].values())}题；已选{len(result["selected"])}题。','', '| 状态 | 数量 |','| --- | ---: |']
@@ -206,13 +206,18 @@ def main():
     parser=argparse.ArgumentParser(description='统一错题库的重温预览与家长任务发布');sub=parser.add_subparsers(dest='command',required=True)
     q=sub.add_parser('plan');q.add_argument('--database',required=True);q.add_argument('--date',default=datetime.now(timezone(timedelta(hours=8))).date().isoformat());q.add_argument('--limits',default='{}',help='家长指定的科目题量JSON；留空只盘点，不生成发布任务');q.add_argument('--minutes',default='{}',help='按科每题平均规划分钟，非计时');q.add_argument('--recommend',action='store_true');q.add_argument('--target-minutes',type=float,default=15);q.add_argument('--out',required=True)
     q=sub.add_parser('publish');q.add_argument('--plan',required=True);q.add_argument('--base-url',required=True);q.add_argument('--out',required=True);q.add_argument('--commit',action='store_true',required=True);q.add_argument('--allow-formal',action='store_true')
+    q=sub.add_parser('week');q.add_argument('--base-url',required=True);q.add_argument('--start-date',required=True);q.add_argument('--days',type=int,default=7);q.add_argument('--limit',type=int,default=10);q.add_argument('--daily-minutes',type=float,default=15);q.add_argument('--minutes-per-question',type=float,default=5);q.add_argument('--subjects',nargs='+');q.add_argument('--out',required=True)
     args=parser.parse_args()
     try:
         if args.command=='plan':
             check(not args.recommend or args.limits=='{}','自动推荐和固定题量不能同时指定')
             r=recommend(args.database,args.date,args.target_minutes,json.loads(args.minutes)) if args.recommend else plan(args.database,args.date,json.loads(args.limits),json.loads(args.minutes))
+        elif args.command=='week':
+            body={'start_date':business_date(args.start_date),'days':args.days,'limit':args.limit,'daily_minutes':args.daily_minutes,'minutes_per_question':args.minutes_per_question}
+            if args.subjects:body['subject_ids']=args.subjects
+            r=request(local_url(args.base_url),'weekly-prepare',body,request(local_url(args.base_url),'review-context')['settings']['data_epoch'])
         else:r=publish(args.plan,args.base_url,args.allow_formal)
-        path=write_report(args.out,r);print(json.dumps({'report':path,'format':r['format'],'counts':r.get('counts'),'selected':len(r.get('selected',[])),'task_ids':r.get('task_ids'),'reused':r.get('reused')},ensure_ascii=False))
+        path=write_report(args.out,r);print(json.dumps({'report':path,'format':r['format'],'counts':r.get('counts'),'selected':r.get('selected_count',len(r.get('selected',[]))),'task_ids':r.get('task_ids'),'reused':r.get('reused')},ensure_ascii=False))
     except (Invalid,ValueError,KeyError,TypeError,OSError,sqlite3.Error) as e:print(json.dumps({'error':str(e)},ensure_ascii=False),file=sys.stderr);return 1
     return 0
 if __name__=='__main__':sys.exit(main())

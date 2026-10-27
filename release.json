@@ -1,25 +1,25 @@
 {
-  "version": "1.8.1-rc.1",
-  "status": "release_candidate",
+  "version": "1.9.0-rc.1",
+  "status": "candidate",
   "schema_version": 4,
-  "tested_workbench_version": "0.9",
+  "tested_workbench_version": "0.10",
   "fingerprint_algorithm": "SHA256(sorted(relative_posix_path UTF8 + NUL + raw_file_bytes + NUL)); .md/.py/.yaml; excludes __pycache__",
   "skill_fingerprints": {
-    "study-question-ingest": "e8d111dc59446425ec4977b9e796228a935ac445eb176803dac35fe77eafe5ac",
-    "study-question-review": "1bd38d599c18e29c421fb5af28bc603c7e3b83083df7b71e15e0c0143ca33d1a"
+    "study-question-ingest": "82546271dc07b028328eede0d06c6f850004b741aa9f10125df7e418a70f02dd",
+    "study-question-review": "0a68edafd19f1c0664c90d29757e1c2b6e65cb5f4cc7c337a1137c8f50275662"
   },
   "files": [
     {
       "path": "skills/study-question-ingest/SKILL.md",
-      "sha256": "d1bb149b2ba315bcc210670316c70b31ead7f4fdf4fba16012a4a55f646eb96e"
+      "sha256": "b4933c1a1a04a9b7171955c7528147189e48e732e2644d7b6d464b8f8c8e54ec"
     },
     {
       "path": "skills/study-question-ingest/agents/openai.yaml",
-      "sha256": "6890a4b52dcba6deb43261294d6f5c35f79c845465dc7fd2fe97207a80d44e5f"
+      "sha256": "369c87c1574df5a0014c457a5d12eae817d271b088c4f98eb7efc687e28bbf3a"
     },
     {
       "path": "skills/study-question-ingest/references/compatibility.md",
-      "sha256": "26b922bd05e5f0030918c6fbbd72c35d47fef5293ddee24ef7031d0c2688ee8c"
+      "sha256": "9ecbd91366cba9f809a815963ea96c9018898e0dd2cadd567dad26637b710dc4"
     },
     {
       "path": "skills/study-question-ingest/references/confirmed-rules.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "skills/study-question-ingest/references/operations.md",
-      "sha256": "5262ee5aae5ffec12f2ca839d158e649f8682d32746ea1d8fc18b3b139fceecd"
+      "sha256": "32014564443f386e7685fa32c67e9d8e89f3c7f5dca440b3fff9384f94f39b60"
     },
     {
       "path": "skills/study-question-ingest/references/parent-review.md",
@@ -63,19 +63,19 @@
     },
     {
       "path": "skills/study-question-ingest/scripts/ingest.py",
-      "sha256": "b1e622a439106c326646b7ae87ab4e2d3ae30de46bf6adf0dd04a1cf285b084d"
+      "sha256": "6b785ec683b468f48a3ab7f025d9c4839d9e82bd12be50025a3499341dfd090e"
     },
     {
       "path": "skills/study-question-review/SKILL.md",
-      "sha256": "1c04a6e631531b3a14bf3b12a7e59e929f151c21d2829184b7e1c76a1ce6704f"
+      "sha256": "29929e0023fe1d048c2001675f1004b0ffa502bae27a918eb8deebf261e945ce"
     },
     {
       "path": "skills/study-question-review/agents/openai.yaml",
-      "sha256": "c17aa9d605b45091cfa28a563b2bcfb331957404a4186248915916a32b6354e5"
+      "sha256": "fc552b50632825026212d1b98f876dbf305d22669466902318845228ef32f90f"
     },
     {
       "path": "skills/study-question-review/references/compatibility.md",
-      "sha256": "26b922bd05e5f0030918c6fbbd72c35d47fef5293ddee24ef7031d0c2688ee8c"
+      "sha256": "9ecbd91366cba9f809a815963ea96c9018898e0dd2cadd567dad26637b710dc4"
     },
     {
       "path": "skills/study-question-review/references/confirmed-rules.md",
@@ -83,7 +83,7 @@
     },
     {
       "path": "skills/study-question-review/references/operations.md",
-      "sha256": "cd1b85f05466c0e0483a29fa06e7bb8b4f92ef877a5ece9efa9fb6bdd3d156ef"
+      "sha256": "9828c018f3c44389bbd1942ef2145e516cdf360b1bce4d4322b58321b429daac"
     },
     {
       "path": "skills/study-question-review/references/parent-review.md",
@@ -115,7 +115,7 @@
     },
     {
       "path": "skills/study-question-review/scripts/review.py",
-      "sha256": "6cec671360e687bf9da11925c429cfc1ae198024828f31324bb5df2b66dd826f"
+      "sha256": "38a763bf0fdab5966497deb8922a254f8e2aaa3338cc0daa438dc1b000f82323"
     }
   ]
 }

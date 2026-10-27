@@ -52,3 +52,24 @@ python3 scripts/ingest.py rollback --database /path/test-data/study.sqlite3 --ba
 用中文说明本批有哪些科目、几道题新增整理、几道跳过、哪些内容待核；交付proposal、plan和执行后receipt。不要把测试回执当成正式入库凭证，不将模拟代理称为真实不同智能体测试。
 
 家长界面已提供建议展示、修改后采纳、拒绝、暂缓及撤销，操作见[家长审核与交接](parent-review.md)。脚本只追加待核建议，家长逐字段采纳与学习结果分开记录；不自动安装Skill，不新增收费或注册资源。
+
+
+## 标准化入库 v2工作流程
+
+本节为1.9版主流程；此前inspect/plan/apply/rollback属于“待核分类注释”模式，不等同完整题面标准化。
+
+工作台导出原交接ZIP时附standard-template.json。按模板逐题实际看图，完成后命名standard-package.json。模板题目需沿用question_id、subject_id、expected_updated_at及data_epoch；批次32位小写十六进制。每批1—30题，设计调试5—10题，不强行凑数。缺题面和必要图形的题列待补，不写入合格包。
+
+顶层严格字段：format="family-study-standard"、version=1、batch_id、data_epoch、questions。
+每题严格字段：question_id、subject_id、expected_updated_at、title（≤100字）、chapter（≤120字）、question_kind、practice_text（≤12000字）、practice_image_ids（最多16个已上传图片编号）、figure_required（布尔）、reference_material、gaps（字符串列表）。
+
+practice_text是无答案题干及选项；practice_image_ids是干净题图或必要附图。两者至少一项非空；依赖图形时figure_required=true且必须有图片。不能把原作答照片直接冒充干净图。数学公式用可可靠显示的普通文本/Unicode；复杂公式可交干净图，别依赖未配置的LaTeX渲染器。
+reference_material中answer、analysis各自为{text,origin,confirmed}；origin仅original或agent。智能体新拟内容必须confirmed=false，家长在界面确认后才能保存为参考。原图中的答案/分析继续保留，未补齐的参考资料列gaps；参考缺项不冒充已验证。
+
+家长操作：标准入库页上传JSON→修正题面/附图编号/参考内容→取消不合格题→核验预览→勾选家长确认→标准入库。必要附图先在同页上传，返回asset_id再填入JSON/表单。不要先删除原照片。分类知识点错因建议仍可单独交proposal.json在分类建议审核处理。
+
+本机API：POST /api/standard-preview {package:<标准包>}只读；POST /api/standard-import {package:<标准包>,confirmed:true}经家长授权后提交。沿用已有parent角色、Origin、data_epoch等保护。POST /api/media先上传干净图。能力不足时由家长在界面导入，不远程猜测本机地址，不另建主库。
+
+正式库写入会校验全批来源版本、科目、题型、必要图形及任务占用，先保存数据库快照，再单事务保存标准题面、题目版本和事件。原照片保留，学习结果和P值不动；只解除质量待核，首次日期按原收题日计算。暂停/已掌握记录不自动重新练习。同批同内容可重试，不同内容必须新批次。学习图片完整备份仍用工作台备份入口。
+
+标准题可附classification对象：knowledge_points与error_types两个字符串列表，各最多10项、每项100字。家长在标准入库页修正核对后，一并保存到同一题号的分类记录；不包含P值。旧proposal仍可用于单独追加分类，但同一交接的来源版本一旦已变，需要重新导出；不能强行同时套用旧版本。
