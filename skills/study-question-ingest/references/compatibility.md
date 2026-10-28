@@ -1,6 +1,6 @@
 # 版本与运行条件
 
-Skill版本：1.9.0-rc.1，候选版；Python 3.9及以上，仅标准库，无新增模型API、订阅或收费账号。
+Skill版本：1.9.1-rc.1，候选版；Python 3.9及以上，仅标准库，无新增模型API、订阅或收费账号。
 
 数据库PRAGMA user_version=4是结构版本，与工作台界面的v0.10不是同一版本号。本版按工作台v0.10及schema=4的统一库验证。普通交接ZIP的协议版本为1，建议格式以各模式引用文档为准。
 
@@ -14,3 +14,5 @@ Skill版本：1.9.0-rc.1，候选版；Python 3.9及以上，仅标准库，无�
 工作台实际加载项目04Skills下的两个目录。更新全局安装目录不会自动更新项目副本。发布时应核对完整Skill目录的源码指纹；不要仅替换SKILL.md而遗漏scripts/references。原有数据库、data/media与备份均不属于Skill更新范围。
 
 1.9主流程依赖工作台v0.10的标准入库与一周备题接口；schema仍为4，新数据放同库settings命名空间。不用旧版工作台冒充已支持。旧注释脚本不能标准化题面。
+
+图片工具是可选的本机macOS几何处理能力（Vision/CoreImage、swiftc），入口scripts/photo_prepare.py，源码assets/photo_prepare.swift；没有本机能力时按image-preparation.md列缺口，不谎称已处理。工作台v0.11已接入同一工具和默认规则；其他原有入库脚本继续只需Python标准库。

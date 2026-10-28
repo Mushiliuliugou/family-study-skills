@@ -15,3 +15,6 @@ data/
 media/
 exports/
 work/
+
+.photo-runtime/
+*.dylib

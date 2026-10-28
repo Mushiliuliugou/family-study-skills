@@ -1,25 +1,29 @@
 {
-  "version": "1.9.0-rc.1",
+  "version": "1.9.1-rc.1",
   "status": "candidate",
   "schema_version": 4,
-  "tested_workbench_version": "0.10",
-  "fingerprint_algorithm": "SHA256(sorted(relative_posix_path UTF8 + NUL + raw_file_bytes + NUL)); .md/.py/.yaml; excludes __pycache__",
+  "tested_workbench_version": "0.11",
+  "fingerprint_algorithm": "SHA256(sorted(relative_posix_path UTF8 + NUL + raw_file_bytes + NUL)); .md/.py/.yaml/.swift; excludes __pycache__",
   "skill_fingerprints": {
-    "study-question-ingest": "82546271dc07b028328eede0d06c6f850004b741aa9f10125df7e418a70f02dd",
+    "study-question-ingest": "1f4db2eb4cd4d42c6ab8b1e2c4d7865a6b1a1f36a0c644932231a3508d7bce26",
     "study-question-review": "0a68edafd19f1c0664c90d29757e1c2b6e65cb5f4cc7c337a1137c8f50275662"
   },
   "files": [
     {
       "path": "skills/study-question-ingest/SKILL.md",
-      "sha256": "b4933c1a1a04a9b7171955c7528147189e48e732e2644d7b6d464b8f8c8e54ec"
+      "sha256": "961cb12fbcbe8539c3e7c77136980b429e32ae0c418342c54680a05ac39be797"
     },
     {
       "path": "skills/study-question-ingest/agents/openai.yaml",
       "sha256": "369c87c1574df5a0014c457a5d12eae817d271b088c4f98eb7efc687e28bbf3a"
     },
     {
+      "path": "skills/study-question-ingest/assets/photo_prepare.swift",
+      "sha256": "5955ff5e191940465efa132948845680d52c34a1205d6dc3a98edc63efdc9015"
+    },
+    {
       "path": "skills/study-question-ingest/references/compatibility.md",
-      "sha256": "9ecbd91366cba9f809a815963ea96c9018898e0dd2cadd567dad26637b710dc4"
+      "sha256": "c9582a83620177be470cc5894ff2ce000d0d8dd06226921519825ccd84b8ad23"
     },
     {
       "path": "skills/study-question-ingest/references/confirmed-rules.md",
@@ -28,6 +32,10 @@
     {
       "path": "skills/study-question-ingest/references/handoff.md",
       "sha256": "3b1207557cc79bcc2d82ee5de1067e413a5a49d1736b14e87ac6bbe6d536b45f"
+    },
+    {
+      "path": "skills/study-question-ingest/references/image-preparation.md",
+      "sha256": "69c82ad9d13e63e4f954dfd3e947b571c8c9dc98084537aa934462efb8133429"
     },
     {
       "path": "skills/study-question-ingest/references/operations.md",
@@ -64,6 +72,10 @@
     {
       "path": "skills/study-question-ingest/scripts/ingest.py",
       "sha256": "6b785ec683b468f48a3ab7f025d9c4839d9e82bd12be50025a3499341dfd090e"
+    },
+    {
+      "path": "skills/study-question-ingest/scripts/photo_prepare.py",
+      "sha256": "6ae02b055aeb624a6c875b145b22c096a895cdcecc9e6a51933287fd06822b41"
     },
     {
       "path": "skills/study-question-review/SKILL.md",

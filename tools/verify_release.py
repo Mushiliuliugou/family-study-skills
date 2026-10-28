@@ -18,7 +18,7 @@ def verify(root=ROOT,workbench_skills=None,check_commands=True):
     actual={p.relative_to(root).as_posix():p for p in (root/'skills').rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.pyc'}
     if set(actual)!=set(listed):raise ValueError('Missing or unexpected Skill files')
     for name,path in actual.items():
-        if path.is_symlink() or path.suffix not in ('.py','.md','.yaml'):raise ValueError('Unexpected file type: '+name)
+        if path.is_symlink() or path.suffix not in ('.py','.md','.yaml','.swift'):raise ValueError('Unexpected file type: '+name)
         if hashlib.sha256(path.read_bytes()).hexdigest()!=listed[name]:raise ValueError('File checksum mismatch: '+name)
         if path.suffix=='.py':ast.parse(path.read_text())
         if path.suffix=='.md':
@@ -27,7 +27,7 @@ def verify(root=ROOT,workbench_skills=None,check_commands=True):
     for name,expected in release['skill_fingerprints'].items():
         folder=root/'skills'/name;digest=hashlib.sha256()
         for path in sorted(folder.rglob('*')):
-            if path.is_file() and '__pycache__' not in path.parts and path.suffix in ('.py','.md','.yaml'):
+            if path.is_file() and '__pycache__' not in path.parts and path.suffix in ('.py','.md','.yaml','.swift'):
                 digest.update(path.relative_to(folder).as_posix().encode()+b'\0'+path.read_bytes()+b'\0')
         if digest.hexdigest()!=expected:raise ValueError('Skill fingerprint mismatch: '+name)
         if workbench_skills:
